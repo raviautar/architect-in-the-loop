@@ -1,6 +1,6 @@
 ---
 name: plain-english
-description: Sticky plain-English reset. Re-loads `pair`'s cut list and caps every following reply at a few words of plain, read-aloud English until you lift it. Use the moment the replies get too long or too AI: "less text", "less text pls", "too verbose", "too much text", "AI slop", "plain english", "write it for a human", "in human terms". Layers on top of `pair`.
+description: 'Sticky plain-English reset. Re-loads `pair`''s cut list and caps every following reply at a few words of plain, read-aloud English until you lift it. Use the moment the replies get too long or too AI: "less text", "less text pls", "too verbose", "too much text", "AI slop", "plain english", "write it for a human", "in human terms". Layers on top of `pair`.'
 ---
 
 # plain-english
