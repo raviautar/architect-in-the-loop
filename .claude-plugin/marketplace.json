@@ -1,0 +1,33 @@
+{
+  "name": "architect-in-the-loop",
+  "version": "1.0.0",
+  "description": "Skills for staying the architect while an agent does the work. You do the thinking; the agent runs in the loop.",
+  "owner": {
+    "name": "Ravi Autar",
+    "email": "9801493+raviautar@users.noreply.github.com"
+  },
+  "repository": "https://github.com/KaranRam245/architect-in-the-loop",
+  "license": "MIT",
+  "skills": [
+    {
+      "name": "pair",
+      "path": "skills/pair",
+      "description": "Foundation voice skill. Conclusion first, ruthlessly brief, no AI tells. Every other skill layers on top."
+    },
+    {
+      "name": "plain-english",
+      "path": "skills/plain-english",
+      "description": "Sticky plain-English reset. Snaps replies back to pair's budget and keeps them there for the rest of the session."
+    },
+    {
+      "name": "teach",
+      "path": "skills/teach",
+      "description": "Learning-mode pacing. One concept per message, anchored to real code, checkpoint before the next."
+    },
+    {
+      "name": "goal-alignment",
+      "path": "skills/goal-alignment",
+      "description": "Co-write a PIV brief, resolve all decisions, prove prerequisites, then hand the agent a self-correcting loop."
+    }
+  ]
+}
