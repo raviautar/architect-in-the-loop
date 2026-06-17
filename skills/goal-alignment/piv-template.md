@@ -1,21 +1,32 @@
 # {short name} — round {N}
 
-```mermaid
-flowchart TD
-    %% one running diagram of the path this round touches; extend it in place as design deepens
-    A["current flow"] --> B["where it breaks"]
-    B --> C["where the change lands"]
-```
+Mermaid diagrams (`flowchart TD`) come after the prose in each section, never before: Problem shows the current flow and where it breaks; Implementation shows what is going to happen.
 
 ## Problem
 
 What is broken or missing, in plain english, and how to observe it so "fixed" is checkable. For a fix-round: name the prior round's brief and the single functional gap it left open. Scope to that gap only, nothing wider.
+
+```mermaid
+flowchart TD
+    %% current flow, with the exact point it breaks marked
+    A["entry"] --> B["step"]
+    B --> X["where it breaks"]:::break
+    classDef break fill:#fdd,stroke:#c00;
+```
 
 ## Implementation
 
 - **Decisions made:** every open decision, one line each with its resolution, so the loop inherits zero.
 - **How it lands:** order and why, commit strategy, what stays unchanged and what is explicitly untouched.
 - **Hygiene:** minimal diff; a comment only where it states a constraint the code cannot show.
+
+```mermaid
+flowchart TD
+    %% what is going to happen: where the change lands and the resulting flow
+    A["entry"] --> C["where the change lands"]:::change
+    C --> D["resulting flow"]
+    classDef change fill:#dfd,stroke:#0a0;
+```
 
 ## Verification
 
@@ -26,7 +37,7 @@ What is broken or missing, in plain english, and how to observe it so "fixed" is
 
 ### Layers (renumbered from 1, cheapest-feedback-first)
 
-1. **seam:** `<the seam this covers>` — **catches:** `<failure class>` — **run:** `<exact command>` — **proof:** `<rendered UI result + backend signal>`
+1. **seam:** `<the seam this covers>`, **catches:** `<failure class>`, **run:** `<exact command>`, **proof:** `<rendered UI result + backend signal>`
 2. ...
 
 ### Critic gate (mandatory, fresh context)

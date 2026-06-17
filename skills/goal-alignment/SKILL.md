@@ -9,7 +9,7 @@ Design-and-preparation skill, and the heart of this repo. It produces one artifa
 
 **Core principle: every decision made and every prerequisite proven during preparation is one the loop never stops for.** Preparation is the most important phase, more important than the implementation itself; never do it sparingly. The loop opens with zero decisions left to make. Preparation is complete only when all three hold:
 
-1. You say you fully understand what is going to happen, reached through teach pacing and one running diagram extended in place.
+1. You say you fully understand what is going to happen, reached through teach pacing and the Mermaid diagrams that carry the problem and the plan.
 2. No open questions or decisions remain; each was walked and resolved into the brief.
 3. Every preparation task that CAN be done before the loop HAS been done now, live (mint the token, capture the real fixture, prove the environment is up, prove each verification layer is actually executable).
 
@@ -29,11 +29,11 @@ The concrete engine here is Claude Code's `/goal`, but the methodology applies t
 
 ## The artifact: the PIV brief — Problem, Implementation, Verification
 
-Plain english, compact enough to read aloud. Fill `piv-template.md`. One running Mermaid diagram (`flowchart TD`) opens the brief and is extended in place all through design; the loop and you read the same picture.
+Plain english, compact enough to read aloud. Fill `piv-template.md`. Mermaid diagrams (`flowchart TD`) carry the structure, and they come AFTER the prose in each section, never opening the brief: Problem gets one or more showing the current flow and exactly where it breaks; Implementation gets one or more showing what is going to happen (where the change lands, the resulting flow). The loop and you read the same pictures.
 
-**Problem.** What is broken or missing, in plain english, and how to observe it so "fixed" is checkable. For a fix-round, name the previous round's brief file and the specific functional gap it left open (e.g. "the second request in a session is served stale data; only the first is correct"). Scope the round to that functional gap only, nothing wider.
+**Problem.** What is broken or missing, in plain english, and how to observe it so "fixed" is checkable. For a fix-round, name the previous round's brief file and the specific functional gap it left open (e.g. "the second request in a session is served stale data; only the first is correct"). Scope the round to that functional gap only, nothing wider. After the prose, draw one or more Mermaid diagrams of the current flow with the exact point it breaks marked.
 
-**Implementation.** The decisions made (every open decision walked during design with its resolution, one line each, so the loop inherits zero), then how it lands: order and why, commit strategy, what stays unchanged and what is explicitly untouched, and the code-hygiene constraint: the worker re-reads `pair`'s cut list (rule 18) before writing code and adds a comment only where it states a constraint the code cannot show, at the file's existing density (usually almost none), and strips any slop comment it or a prior round left. Keep the change minimal; cut edits the round does not need.
+**Implementation.** The decisions made (every open decision walked during design with its resolution, one line each, so the loop inherits zero), then how it lands: order and why, commit strategy, what stays unchanged and what is explicitly untouched, and the code-hygiene constraint: the worker re-reads `pair`'s cut list (rule 18) before writing code and adds a comment only where it states a constraint the code cannot show, at the file's existing density (usually almost none), and strips any slop comment it or a prior round left. Keep the change minimal; cut edits the round does not need. After the prose, draw one or more Mermaid diagrams of what is going to happen: where the change lands and the resulting flow.
 
 **Verification.** How the implementation is proven to have landed. Three parts, in order:
 
@@ -88,11 +88,11 @@ Right-sizing: the gate preamble + end state + how it is proven + one constraint 
 - [ ] 1. Frame the round. New feature or fix-round? If a fix-round, the Problem points at
         the prior brief and the gap the between-rounds audit found. If the task arrives with
         no context, gather it first. Co-write Problem and Implementation in pair voice;
-        explain unfamiliar code in teach pacing (one concept, one anchor, checkpoint). Start
-        the running diagram here.
+        explain unfamiliar code in teach pacing (one concept, one anchor, checkpoint). Draw
+        the Problem diagram(s) here, after the prose.
 - [ ] 2. Walk the open decisions, one at a time. Enumerate every decision the implementation
-        would otherwise hit, resolve each with you in teach pacing while extending the
-        diagram; each resolution folds into Implementation's "decisions made". A decision
+        would otherwise hit, resolve each with you in teach pacing while building up the
+        Implementation diagram(s); each resolution folds into Implementation's "decisions made". A decision
         settled now never ships to the loop.
 - [ ] 3. Prove the prerequisites live, as a QA engineer. Validate the stack through the exact
         path each layer will use, including loading the client UI and reaching the feature's
