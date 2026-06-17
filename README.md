@@ -6,7 +6,9 @@ The bet: coding agents are strongest when a human does the thinking up front and
 
 ## The skills
 
-**`pair`** — the voice. How the agent talks to you: conclusion first, ruthlessly brief, no AI tells, honest about what it did and didn't verify. The foundation the other two build on.
+**`pair`** — the voice. How the agent talks to you: conclusion first, ruthlessly brief, no AI tells, honest about what it did and didn't verify. The foundation the others build on.
+
+**`plain-english`** — the sticky reset. When the agent drifts long or starts sounding like AI, one word (*"less text"*, *"plain english"*) snaps it back to `pair`'s budget and keeps it there for the rest of the session, not just the next reply.
 
 **`teach`** — learning mode. One concept per message, anchored to real code, one diagram extended in place instead of fresh walls of prose, and it backs up the moment you're lost.
 
@@ -14,13 +16,15 @@ The bet: coding agents are strongest when a human does the thinking up front and
 
 ## How they fit together
 
-`pair` is the foundation: the voice and working rules every reply obeys. `teach` and `goal-alignment` inherit it, and `goal-alignment` also reuses `teach`'s pacing whenever it has to explain code mid-design.
+`pair` is the foundation: the voice and working rules every reply obeys. `teach`, `plain-english`, and `goal-alignment` inherit it, and `goal-alignment` also reuses `teach`'s pacing whenever it has to explain code mid-design.
 
 ```mermaid
 flowchart TD
     pair["pair<br/>the voice"]
+    plain["plain-english<br/>sticky reset"]
     teach["teach<br/>learning mode"]
     goal["goal-alignment<br/>the loop"]
+    pair -->|inherited by| plain
     pair -->|inherited by| teach
     pair -->|inherited by| goal
     teach -->|pacing reused by| goal
