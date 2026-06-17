@@ -12,6 +12,20 @@ The bet: coding agents are strongest when a human does the thinking up front and
 
 **`goal-alignment`** — the loop. Do all the deciding and proving *before* the loop starts, co-write a plain-english brief (Problem, Implementation, Verification), then hand the agent a self-correcting loop whose only completion criteria are checks that actually land in the transcript. Preparation is the product; the loop is the cheap part.
 
+## How they fit together
+
+`pair` is the foundation: the voice and working rules every reply obeys. `teach` and `goal-alignment` inherit it, and `goal-alignment` also reuses `teach`'s pacing whenever it has to explain code mid-design.
+
+```mermaid
+flowchart TD
+    pair["pair<br/>the voice"]
+    teach["teach<br/>learning mode"]
+    goal["goal-alignment<br/>the loop"]
+    pair -->|inherited by| teach
+    pair -->|inherited by| goal
+    teach -->|pacing reused by| goal
+```
+
 ## Why "in the loop"
 
 Two readings, both intended. The agent runs *in a loop*, a condition re-graded every turn by an independent grader until it's met. And you, the human, stay *in the loop*: you do the architecture, resolve every decision, and prove the runway before a single turn runs. `goal-alignment` exists to make both true at once.
