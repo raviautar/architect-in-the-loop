@@ -36,11 +36,29 @@ Two readings, both intended. The agent runs *in a loop*, a condition re-graded e
 
 ## Using them
 
-These are plain Claude Code skills. Copy the folders into your skills directory:
+### Option 1: Install as a Claude Code Plugin (Recommended)
+
+You can install these skills as a local Claude Code plugin directly from your cloned directory:
+
+```sh
+claude plugin install /path/to/architect-in-the-loop
+```
+
+Alternatively, you can test it temporarily in a single Claude Code session:
+
+```sh
+claude --plugin-dir /path/to/architect-in-the-loop
+```
+
+### Option 2: Copy Manual Skills
+
+If you prefer to install them manually as individual skills, copy the folders into your skills directory:
 
 ```sh
 cp -r skills/pair skills/teach skills/goal-alignment ~/.claude/skills/
 ```
+
+### Invocation
 
 Then invoke by name (*"align the goal"*, *"walk me through X"*) or let Claude pick them up by their descriptions. `pair` is the always-on voice; `teach` and `goal-alignment` layer on top of it.
 
