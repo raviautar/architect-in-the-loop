@@ -1,7 +1,10 @@
 # {short name} — round {N}
 
-```
-<one running ASCII diagram of the path this round touches; extend it in place as design deepens>
+```mermaid
+flowchart TD
+    %% one running diagram of the path this round touches; extend it in place as design deepens
+    A["current flow"] --> B["where it breaks"]
+    B --> C["where the change lands"]
 ```
 
 ## Problem

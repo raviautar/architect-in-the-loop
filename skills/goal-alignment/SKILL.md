@@ -29,7 +29,7 @@ The concrete engine here is Claude Code's `/goal`, but the methodology applies t
 
 ## The artifact: the PIV brief — Problem, Implementation, Verification
 
-Plain english, compact enough to read aloud. Fill `piv-template.md`. One running ASCII diagram opens the brief and is extended in place all through design; the loop and you read the same picture.
+Plain english, compact enough to read aloud. Fill `piv-template.md`. One running Mermaid diagram (`flowchart TD`) opens the brief and is extended in place all through design; the loop and you read the same picture.
 
 **Problem.** What is broken or missing, in plain english, and how to observe it so "fixed" is checkable. For a fix-round, name the previous round's brief file and the specific functional gap it left open (e.g. "the second request in a session is served stale data; only the first is correct"). Scope the round to that functional gap only, nothing wider.
 
