@@ -1,4 +1,4 @@
-# Loop Engineering: a reading list
+# Loop Engineering: Reading List
 
 Loop Engineering promises to be the new direction for orchestrating agents and
 getting the most out of frontier models. A lot of smart people and orgs have
