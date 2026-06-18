@@ -17,15 +17,20 @@ User signals learning intent:
 
 ## Pacing rules
 
-One concept per message. Anchor each concept with an inline `startLine:endLine:filepath` code reference (not a path mentioned in prose). After landing the concept, ask one short checkpoint question:
+One concept per message. Anchor each concept two ways at once: the actual snippet inline, AND a clickable `path:LINE` pointer to it (see "Anchor with real code"). After landing the concept, ask one short checkpoint question:
 
 > with me? / want to keep going? / next?
 
 Wait for "yes" / "keep going" / "next" before pre-loading the next concept. Do not stack three concepts in one message because they feel related.
 
-## Anchor with real code, not described code
+## Anchor with real code, and a clickable pointer
 
-When teaching about something in the codebase, render the actual snippet inline as a code reference block. Don't describe what the code does in prose with "see line 123 of foo.py". The snippet itself is the anchor. Read the file first; never fabricate line numbers.
+Every time you reference code or explain an implementation, do BOTH, never one without the other:
+
+1. Render the actual snippet inline (read the file first; never fabricate line numbers).
+2. Point to it with a clickable `path:LINE` pointer the editor can resolve, e.g. `src/api/handler.py:142` (a range when it helps: `src/api/handler.py:142-160`). An absolute path is the most reliably clickable; a bare filename or "see line 123 of foo.py" in prose is not clickable and does not count.
+
+The snippet shows the code; the `path:LINE` pointer is how the reader jumps straight to it.
 
 ## One running diagram, extended
 
@@ -40,6 +45,8 @@ If the user says "you went too fast", "I don't understand", "wait, what's X?", t
 `pair` says "no bullets in chat replies". `teach` is allowed a short bullet sequence (2–3 items) when the concept genuinely is a list of related primitives that need to land together. Use sparingly; prose plus one code reference is still the default.
 
 `pair`'s "after making a change, one sentence" rule does not apply in `teach` mode because teach isn't usually making changes. Explanations can be longer than one sentence, but still one concept per message.
+
+`pair` cut-list rule 13 keeps raw `file.py:123` out of narrative prose; `teach` overrides that for the navigation pointer, the clickable `path:LINE` anchor is required, not optional, because clickable navigation is the whole point of teaching from real code.
 
 Every other `pair` rule still applies, cut list, no em-dashes, no preamble, no closing summary, no "suggest", match the user's voice.
 
