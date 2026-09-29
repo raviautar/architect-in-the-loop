@@ -1,11 +1,11 @@
 ---
 name: teach
-description: Learning-mode pacing for walkthroughs and explanations. Use when the user says "walk me through", "explain", "help me understand", "beat by beat", "I'm new to X", or otherwise signals they want to learn a concept rather than execute a task. Layers on top of `pair`.
+description: Learning-mode pacing for walkthroughs and explanations. Use when the user says "walk me through", "explain", "help me understand", "beat by beat", "I'm new to X", or otherwise signals they want to learn a concept rather than execute a task. Layers on top of `plain-english`.
 ---
 
 # teach
 
-Learning-mode skill. Depends on `pair` (voice, tone, drift-recovery). Adds pacing rules specific to teaching one concept at a time.
+Learning-mode skill. Depends on `plain-english` (the voice and its rules). Adds pacing rules specific to teaching one concept at a time.
 
 ## When to trigger
 
@@ -40,16 +40,16 @@ For anything structural (workflows, pipelines, parent/child topologies), draw on
 
 If the user says "you went too fast", "I don't understand", "wait, what's X?", that means the previous beat didn't land. Back up to the last beat they confirmed and restart from there. Don't keep pushing forward and add new context, go back, re-anchor, slow down.
 
-## Where this overrides `pair`
+## Where this loosens `plain-english`
 
-`pair` says "no bullets in chat replies". `teach` is allowed a short bullet sequence (2–3 items) when the concept genuinely is a list of related primitives that need to land together. Use sparingly; prose plus one code reference is still the default.
+A short bullet sequence (2 or 3 items) is allowed when the concept really is a list of related primitives that need to land together. Use sparingly; prose plus one code reference is still the default.
 
-`pair`'s "after making a change, one sentence" rule does not apply in `teach` mode because teach isn't usually making changes. Explanations can be longer than one sentence, but still one concept per message.
+Explanations can run longer than a normal reply, but still one concept per message.
 
-`pair` cut-list rule 13 keeps raw `file.py:123` out of narrative prose; `teach` overrides that for the navigation pointer, the clickable `path:LINE` anchor is required, not optional, because clickable navigation is the whole point of teaching from real code.
+The code anchor is a local clickable `path:LINE` pointer instead of a GitHub link, because clickable navigation into the editor is the whole point of teaching from real code.
 
-Every other `pair` rule still applies, cut list, no em-dashes, no preamble, no closing summary, no "suggest", match the user's voice.
+Every other `plain-english` rule still applies.
 
 ## When to exit teach mode
 
-When the user signals they understand and want to act: "got it, now let's…", "ok, do it", "ready, make the change". From that point, drop the checkpoint questions and operate in `pair`'s execute default.
+When the user signals they understand and want to act: "got it, now let's…", "ok, do it", "ready, make the change". From that point, drop the checkpoint questions and return to `plain-english`'s default.

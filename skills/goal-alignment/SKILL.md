@@ -1,6 +1,6 @@
 ---
 name: goal-alignment
-description: Align on a plain-english brief (Problem, Implementation, Verification) for a feature or fix, drive all preparation to completion (your understanding, open decisions, live prerequisites), then hand the agent a self-correcting loop. The skill owns the thinking and the preparation; the loop owns the looping. Each run is one round with its own fresh brief file. Use when the user says "align the goal", "build a goal", "plan a goal", "build a loop", "write the brief", "write the piv", "design the proof", "next round". Inherits `pair` and `teach`.
+description: Align on a plain-english brief (Problem, Implementation, Verification) for a feature or fix, drive all preparation to completion (your understanding, open decisions, live prerequisites), then hand the agent a self-correcting loop. The skill owns the thinking and the preparation; the loop owns the looping. Each run is one round with its own fresh brief file. Use when the user says "align the goal", "build a goal", "plan a goal", "build a loop", "write the brief", "write the piv", "design the proof", "next round". Inherits `plain-english` and `teach`.
 ---
 
 # goal-alignment
@@ -15,7 +15,7 @@ Design-and-preparation skill, and the heart of this repo. It produces one artifa
 
 **Rounds, not one growing goal.** Each loop run is one round with its own fresh brief file. A round is scoped to one functional outcome; its verification layers are numbered from 1. The next round gets a NEW file, carries forward only the still-open gap, and renumbers from 1 again. Never edit-pile onto the last round's brief: an accreting plan becomes too complicated for a human head to follow, and stale, already-passed layers drown the live work.
 
-Inherits `pair` (voice, cut list, drift-recovery) and `teach` (pacing). The brief is co-written, so whenever you need the codebase explained mid-design, switch to teach pacing: one concept per message, anchored to a real snippet or a diagram you extend, checkpoint before the next. You read everything this skill produces; digestible beats complete.
+Inherits `plain-english` (voice, rules, anti-patterns) and `teach` (pacing). The brief is co-written, so whenever you need the codebase explained mid-design, switch to teach pacing: one concept per message, anchored to a real snippet or a diagram you extend, checkpoint before the next. You read everything this skill produces; digestible beats complete.
 
 ## The engine: a loop with an independent grader
 
@@ -33,7 +33,7 @@ Plain english, compact enough to read aloud. Fill `piv-template.md`. Mermaid dia
 
 **Problem.** What is broken or missing, in plain english, and how to observe it so "fixed" is checkable. For a fix-round, name the previous round's brief file and the specific functional gap it left open (e.g. "the second request in a session is served stale data; only the first is correct"). Scope the round to that functional gap only, nothing wider. After the prose, draw one or more Mermaid diagrams of the current flow with the exact point it breaks marked.
 
-**Implementation.** The decisions made (every open decision walked during design with its resolution, one line each, so the loop inherits zero), then how it lands: order and why, commit strategy, what stays unchanged and what is explicitly untouched, and the code-hygiene constraint: the worker re-reads `pair`'s cut list (rule 18) before writing code and adds a comment only where it states a constraint the code cannot show, at the file's existing density (usually almost none), and strips any slop comment it or a prior round left. Keep the change minimal; cut edits the round does not need. After the prose, draw one or more Mermaid diagrams of what is going to happen: where the change lands and the resulting flow.
+**Implementation.** The decisions made (every open decision walked during design with its resolution, one line each, so the loop inherits zero), then how it lands: order and why, commit strategy, what stays unchanged and what is explicitly untouched, and the code-hygiene constraint: the worker re-reads `plain-english`'s anti-pattern on code comments before writing code and adds a comment only where it states a constraint the code cannot show, at the file's existing density (usually almost none), and strips any slop comment it or a prior round left. Keep the change minimal; cut edits the round does not need. After the prose, draw one or more Mermaid diagrams of what is going to happen: where the change lands and the resulting flow.
 
 **Verification.** How the implementation is proven to have landed. Three parts, in order:
 
@@ -113,7 +113,7 @@ Right-sizing: the gate preamble + end state + how it is proven + one constraint 
 ```
 - [ ] 1. Frame the round. New feature or fix-round? If a fix-round, the Problem points at
         the prior brief and the gap the between-rounds audit found. If the task arrives with
-        no context, gather it first. Co-write Problem and Implementation in pair voice;
+        no context, gather it first. Co-write Problem and Implementation in plain-english voice;
         explain unfamiliar code in teach pacing (one concept, one anchor, checkpoint). Draw
         the Problem diagram(s) here, after the prose.
 - [ ] 2. Walk the open decisions, one at a time. Enumerate every decision the implementation

@@ -10,14 +10,9 @@
   "license": "MIT",
   "skills": [
     {
-      "name": "pair",
-      "path": "skills/pair",
-      "description": "Foundation voice skill. Conclusion first, ruthlessly brief, no AI tells. Every other skill layers on top."
-    },
-    {
       "name": "plain-english",
       "path": "skills/plain-english",
-      "description": "Sticky plain-English reset. Snaps replies back to pair's budget and keeps them there for the rest of the session."
+      "description": "Foundation voice skill. High-school level language, short sentences, no AI tells. Every other skill layers on top."
     },
     {
       "name": "teach",

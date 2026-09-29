@@ -1,0 +1,48 @@
+---
+description: Where this workstation's tools and services live. Skills find this file by walking up from the working directory for `.agents/resources.mdc`; the nearest file wins.
+alwaysApply: true
+---
+
+# Resources
+
+Copy this file to `.agents/resources.mdc` at the root of your workspace and fill it in. Delete the rows you do not use.
+
+Keep the filled-in file out of any public repo. It names your hosts, your tracker and your customers. Skills read it at runtime, so none of that ever has to be written into a skill.
+
+## Services
+
+`Access` tells the agent what to reach for: `MCP` (use the matching MCP server), `API` (direct HTTP, with a token from an environment variable), `CLI`, or `Browser`.
+
+| URL | What it is | Access | Use it for |
+|---|---|---|---|
+| {https://tracker.example.com} | Issue tracker | {MCP} | Tickets, sprint planning |
+| {https://chat.example.com} | Team chat | {MCP} | Discussions, ongoing investigations |
+| {https://docs.example.com} | Docs and notes | {MCP} | Meeting notes, specs, design reviews |
+| {https://logs.example.com} | Logs, traces, metrics | {API, token in `$LOGS_TOKEN`} | What happened in a running service |
+| {https://ci.example.com} | CI and deploys | {CLI} | Build results, what is deployed where |
+
+## Environments
+
+| Env | API | App | Notes |
+|---|---|---|---|
+| dev | {api.dev.example.com} | {app.dev.example.com} | |
+| stage | | | |
+| prod | | | |
+
+## Destinations
+
+Where written artifacts go. Give the parent page or folder, and how to create under it.
+
+- **Tickets**: {tracker project, default assignee, board or sprint}
+- **Reports**: {where, and the parent page or folder id}
+- **Specs**: {where, and the parent page or folder id}
+
+## Access notes
+
+- **Tokens**: name the environment variable, never the value.
+- **Browser**: {which hosts the browser profile is already signed in to}
+- **VPN or cluster access**: {what has to be connected first}
+
+## Customers and internal names
+
+{Customer names, internal code names and the environments that belong to them. They live here so they never appear in a skill, a public repo or a shared example.}

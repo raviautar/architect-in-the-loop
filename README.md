@@ -6,27 +6,23 @@ The bet: coding agents are strongest when a human does the thinking up front and
 
 ## The skills
 
-**`pair`** — the voice. How the agent talks to you: conclusion first, ruthlessly brief, no AI tells, honest about what it did and didn't verify. The foundation the others build on.
+**`plain-english`**: the voice. How the agent talks to you on every reply: high-school level language, short sentences with one fact each, no AI tells, honest about what it did and did not check. Say *"less text"* or *"high-school language"* once and the tighter style holds for the rest of the session. The foundation the others build on.
 
-**`plain-english`** — the sticky reset. When the agent drifts long or starts sounding like AI, one word (*"less text"*, *"plain english"*) snaps it back to `pair`'s budget and keeps it there for the rest of the session, not just the next reply.
+**`teach`**: learning mode. One concept per message, anchored to real code, one diagram extended in place instead of fresh walls of prose, and it backs up the moment you're lost.
 
-**`teach`** — learning mode. One concept per message, anchored to real code, one diagram extended in place instead of fresh walls of prose, and it backs up the moment you're lost.
-
-**`goal-alignment`** — the loop. Do all the deciding and proving *before* the loop starts, co-write a plain-english brief (Problem, Implementation, Verification), then hand the agent a self-correcting loop whose only completion criteria are checks that actually land in the transcript. Preparation is the product; the loop is the cheap part.
+**`goal-alignment`**: the loop. Do all the deciding and proving *before* the loop starts, co-write a plain-english brief (Problem, Implementation, Verification), then hand the agent a self-correcting loop whose only completion criteria are checks that actually land in the transcript. Preparation is the product; the loop is the cheap part.
 
 ## How they fit together
 
-`pair` is the foundation: the voice and working rules every reply obeys. `teach`, `plain-english`, and `goal-alignment` inherit it, and `goal-alignment` also reuses `teach`'s pacing whenever it has to explain code mid-design.
+`plain-english` is the foundation: the voice and working rules every reply obeys. `teach` and `goal-alignment` inherit it, and `goal-alignment` also reuses `teach`'s pacing whenever it has to explain code mid-design.
 
 ```mermaid
 flowchart TD
-    pair["pair<br/>the voice"]
-    plain["plain-english<br/>sticky reset"]
+    plain["plain-english<br/>the voice"]
     teach["teach<br/>learning mode"]
     goal["goal-alignment<br/>the loop"]
-    pair -->|inherited by| plain
-    pair -->|inherited by| teach
-    pair -->|inherited by| goal
+    plain -->|inherited by| teach
+    plain -->|inherited by| goal
     teach -->|pacing reused by| goal
 ```
 
@@ -55,12 +51,31 @@ claude --plugin-dir /path/to/architect-in-the-loop
 If you prefer to install them manually as individual skills, copy the folders into your skills directory:
 
 ```sh
-cp -r skills/pair skills/teach skills/goal-alignment ~/.claude/skills/
+cp -r skills/plain-english skills/teach skills/goal-alignment ~/.claude/skills/
 ```
 
 ### Invocation
 
-Then invoke by name (*"align the goal"*, *"walk me through X"*) or let Claude pick them up by their descriptions. `pair` is the always-on voice; `teach` and `goal-alignment` layer on top of it.
+Then invoke by name (*"align the goal"*, *"walk me through X"*) or let Claude pick them up by their descriptions.
+
+`plain-english` is meant to be always on. To load it in every session, import it from your `~/.claude/CLAUDE.md`:
+
+```
+@/path/to/architect-in-the-loop/skills/plain-english/SKILL.md
+```
+
+It sets the reading level and the wording. It sets no length budget of its own, so it works well next to Claude Code's Concise output style.
+
+### Your resources file
+
+The skills never name a host, a tracker, a page id or a customer. Those live in one file on your machine, `.agents/resources.mdc`, which the agent finds by walking up from the working directory. Start from the template:
+
+```sh
+mkdir -p ~/your-workspace/.agents
+cp skills/plain-english/resources-template.mdc ~/your-workspace/.agents/resources.mdc
+```
+
+Fill it in and keep it out of any public repo.
 
 ## Notes
 
