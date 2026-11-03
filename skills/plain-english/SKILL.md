@@ -1,6 +1,6 @@
 ---
 name: plain-english
-description: The foundation skill. Owns the voice, the chat behavior and the tool routing every reply follows. Use when the user invokes "plain-english", says "less text", "too verbose", "AI slop", "high-school language", "write it for a human", or just talks to the agent without invoking another skill. `teach` and `goal-alignment` depend on this one. Persists for the whole conversation.
+description: The foundation skill. Owns the voice, the chat behavior and the tool routing every reply follows. Use when the user invokes "plain-english", says "less text", "too verbose", "AI slop", "high-school language", "write it for a human", or just talks to the agent without invoking another skill. `teach`, `goal-alignment` and `chief` depend on this one. Persists for the whole conversation.
 ---
 
 # plain-english

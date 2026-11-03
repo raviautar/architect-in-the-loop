@@ -12,18 +12,23 @@ The bet: coding agents are strongest when a human does the thinking up front and
 
 **`goal-alignment`**: the loop. Do all the deciding and proving *before* the loop starts, co-write a plain-english brief (Problem, Implementation, Verification), then hand the agent a self-correcting loop whose only completion criteria are checks that actually land in the transcript. Preparation is the product; the loop is the cheap part.
 
+**`chief`**: the operating model, and the biggest change to day-to-day work in this repo. One loop is easy to watch. Five loops in five terminals are not, and the human quietly becomes their switchboard. `chief` fixes that: you talk to one session, the chief. Every other session is a *box* (a long-lived workstream in its own tmux window) or a *runner* (a background worker for one job). The chief routes work, drives the boxes, keeps a registry of what is running, reads an append-only ledger the boxes write to, and brings you one thing at a time. It ships with twelve rules, each written down the day breaking it cost something, and each with its reason next to it.
+
 ## How they fit together
 
-`plain-english` is the foundation: the voice and working rules every reply obeys. `teach` and `goal-alignment` inherit it, and `goal-alignment` also reuses `teach`'s pacing whenever it has to explain code mid-design.
+`plain-english` is the foundation: the voice and working rules every reply obeys. `teach`, `goal-alignment` and `chief` inherit it, and `goal-alignment` also reuses `teach`'s pacing whenever it has to explain code mid-design. `chief` sits one level up: each `goal-alignment` loop runs inside a box, and the chief keeps all of them moving while you deal with one thing at a time.
 
 ```mermaid
 flowchart TD
     plain["plain-english<br/>the voice"]
     teach["teach<br/>learning mode"]
     goal["goal-alignment<br/>the loop"]
+    chief["chief<br/>many loops, one conversation"]
     plain -->|inherited by| teach
     plain -->|inherited by| goal
+    plain -->|inherited by| chief
     teach -->|pacing reused by| goal
+    chief -->|runs each loop in a box| goal
 ```
 
 ## Why "in the loop"
@@ -51,12 +56,12 @@ claude --plugin-dir /path/to/architect-in-the-loop
 If you prefer to install them manually as individual skills, copy the folders into your skills directory:
 
 ```sh
-cp -r skills/plain-english skills/teach skills/goal-alignment ~/.claude/skills/
+cp -r skills/plain-english skills/teach skills/goal-alignment skills/chief ~/.claude/skills/
 ```
 
 ### Invocation
 
-Then invoke by name (*"align the goal"*, *"walk me through X"*) or let Claude pick them up by their descriptions.
+Then invoke by name (*"align the goal"*, *"walk me through X"*, *"put this in a box"*) or let Claude pick them up by their descriptions.
 
 `plain-english` is meant to be always on. To load it in every session, import it from your `~/.claude/CLAUDE.md`:
 
@@ -76,6 +81,10 @@ cp skills/plain-english/resources-template.mdc ~/your-workspace/.agents/resource
 ```
 
 Fill it in and keep it out of any public repo.
+
+### Running the chief
+
+`chief` needs tmux. Start one tmux session named `chief` from your workspace root, run Claude Code in window 0, and tell it to be the chief. It opens a window per box as work comes in. Copy [registry-template.md](skills/chief/registry-template.md) to `.agents/chief/registry.md` in your workspace; the ledger lives next to it in `.agents/ledger/`. Keep both out of any public repo, like the resources file.
 
 ## Notes
 

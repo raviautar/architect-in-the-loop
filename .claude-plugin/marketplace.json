@@ -23,6 +23,11 @@
       "name": "goal-alignment",
       "path": "skills/goal-alignment",
       "description": "Co-write a PIV brief, resolve all decisions, prove prerequisites, then hand the agent a self-correcting loop."
+    },
+    {
+      "name": "chief",
+      "path": "skills/chief",
+      "description": "Run many Claude Code sessions at once. One chief routes work between tmux-hosted boxes and background runners, coordinates through a ledger, and presents one thing at a time."
     }
   ]
 }

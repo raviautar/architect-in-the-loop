@@ -6,4 +6,4 @@ One idea: you read everything the agent sends, so every reply is written at high
 
 It also keeps private details out of the skills. Hosts, trackers, page ids and customer names live in your own `.agents/resources.mdc`; start from [resources-template.mdc](resources-template.mdc).
 
-`teach` and `goal-alignment` inherit this skill. See [SKILL.md](SKILL.md).
+`teach`, `goal-alignment` and `chief` inherit this skill. See [SKILL.md](SKILL.md).
